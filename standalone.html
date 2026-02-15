@@ -800,6 +800,109 @@ values (as shown with the 1/2e bound), but automated statistical
 validation could be enhanced.</li>
 </ul>
 </div>
+<div class="section" id="behind-the-scenes">
+<h1>Behind the Scenes</h1>
+<p>This showcase was itself created entirely by <strong>Agent Zero</strong> — an autonomous
+AI agent running inside a Docker container. What you see above is not a
+hand-crafted document: every word, every chart, every line of code was
+generated through natural-language conversation between a human user and
+the AI.</p>
+
+<p>But the story doesn't end with the first draft. After the initial
+production, the human reviewer requested <strong>five additional rounds of
+edits</strong> before the showcase reached its current form. Here is what
+happened:</p>
+
+<table class="docutils" style="width:100%; border-collapse:collapse; margin:1.5em 0;">
+<colgroup>
+<col style="width:5%" />
+<col style="width:25%" />
+<col style="width:35%" />
+<col style="width:35%" />
+</colgroup>
+<thead>
+<tr style="background:#2a2a3a;">
+<th style="padding:10px; text-align:center; color:#cdd6f4;">#</th>
+<th style="padding:10px; color:#cdd6f4;">Issue Reported</th>
+<th style="padding:10px; color:#cdd6f4;">Root Cause</th>
+<th style="padding:10px; color:#cdd6f4;">How Agent Zero Fixed It</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background:#1e1e2e;">
+<td style="padding:10px; text-align:center; color:#cdd6f4;">1</td>
+<td style="padding:10px; color:#cdd6f4;"><strong>White text on light background</strong> — syntax-highlighted code blocks
+were unreadable because light-coloured tokens disappeared against the
+default styling.</td>
+<td style="padding:10px; color:#cdd6f4;">The Docutils/Pygments CSS used colours designed for a white background,
+but the showcase applied a dark card theme around them.</td>
+<td style="padding:10px; color:#cdd6f4;">Implemented a full <em>Catppuccin Mocha</em> dark-theme CSS override for all
+<code>pre.literal-block</code> and <code>pre.code</code> elements, remapping every
+Pygments token class to high-contrast colours.</td>
+</tr>
+<tr style="background:#252536;">
+<td style="padding:10px; text-align:center; color:#cdd6f4;">2</td>
+<td style="padding:10px; color:#cdd6f4;"><strong>Light background boxes on tokens</strong> — individual <code>&lt;span&gt;</code> elements
+inside code blocks still had light background patches, creating a
+"patchwork" effect.</td>
+<td style="padding:10px; color:#cdd6f4;">Pygments injects inline <code>background-color</code> on certain token spans
+(strings, numbers, etc.) that overrode the block-level dark background.</td>
+<td style="padding:10px; color:#cdd6f4;">Added a global CSS rule:
+<code>pre.code span, pre.literal-block span { background: transparent
+!important; }</code> to force all token backgrounds to inherit from the
+parent block.</td>
+</tr>
+<tr style="background:#1e1e2e;">
+<td style="padding:10px; text-align:center; color:#cdd6f4;">3</td>
+<td style="padding:10px; color:#cdd6f4;"><strong>Red "System Message: WARNING/2"</strong> — a visible error banner appeared
+in the rendered HTML inside the NED code section.</td>
+<td style="padding:10px; color:#cdd6f4;">Docutils could not find a Pygments lexer for the <code>ned</code> language,
+so it rendered a raw error message instead of highlighted code.</td>
+<td style="padding:10px; color:#cdd6f4;">Removed the error <code>&lt;div&gt;</code> from the HTML, cleaned up the raw RST
+directive artefacts, applied custom syntax highlighting to the NED
+code manually, and added a global CSS rule to hide any future
+<code>system-message</code> divs.</td>
+</tr>
+<tr style="background:#252536;">
+<td style="padding:10px; text-align:center; color:#cdd6f4;">4</td>
+<td style="padding:10px; color:#cdd6f4;"><strong>Poor workflow diagram</strong> — the architecture diagram had disconnected
+arrows, messy layout, and was hard to follow.</td>
+<td style="padding:10px; color:#cdd6f4;">The original diagram was generated with <code>matplotlib</code> using manual
+coordinate placement, which produced imprecise arrow positioning and
+no automatic layout.</td>
+<td style="padding:10px; color:#cdd6f4;">Completely replaced the diagram engine with <strong>Graphviz</strong> (<code>dot</code>),
+producing a professional left-to-right flowchart with properly
+connected, colour-coded arrows, labelled edges, and automatic
+node alignment.</td>
+</tr>
+<tr style="background:#1e1e2e;">
+<td style="padding:10px; text-align:center; color:#cdd6f4;">5</td>
+<td style="padding:10px; color:#cdd6f4;"><strong>Excessive black space in screenshots</strong> — the IDE and Qtenv
+screenshots were 1920×1080 with most of the area being empty
+black from the virtual display.</td>
+<td style="padding:10px; color:#cdd6f4;">Screenshots were captured from an Xvfb virtual framebuffer at full
+HD resolution, but the application windows only occupied a portion
+of the screen.</td>
+<td style="padding:10px; color:#cdd6f4;">Used ImageMagick's <code>convert -fuzz 5% -trim +repage</code> to
+automatically detect and crop the black borders, reducing the IDE
+image to 1100×739 and Qtenv to 1100×700 — a ~66% reduction in
+area, making the content fill the frame.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Each fix was applied autonomously by Agent Zero: the user described the
+problem in plain English (sometimes with a screenshot), and the agent
+diagnosed the root cause, wrote the fix, tested it, committed to GitHub,
+and sent a confirmation via Telegram — all without manual intervention.</p>
+
+<p>This iterative refinement loop is itself a demonstration of the
+agent's capabilities: it can not only <em>produce</em> content, but also
+<em>review, debug, and improve</em> it based on human feedback — exactly the
+kind of workflow that makes AI-assisted simulation research practical.</p>
+</div>
+
+
 <div class="section" id="discussion">
 <h1>Discussion</h1>
 <p>Use <a class="reference external" href="https://github.com/fganzer/agentzero-omnetpp-showcase/issues">this page</a>
