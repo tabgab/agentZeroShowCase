@@ -360,6 +360,7 @@ ul.auto-toc {
 
 </style>
 
+
 <style type="text/css">
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -373,11 +374,47 @@ body {
 h1 { color: #1a5276; border-bottom: 3px solid #2980b9; padding-bottom: 10px; }
 h2 { color: #2c3e50; margin-top: 2em; }
 h3 { color: #34495e; }
-pre, .literal-block { 
-    background: #2d2d2d; color: #f8f8f2; padding: 16px; 
-    border-radius: 8px; overflow-x: auto; font-size: 14px;
+
+/* Code blocks - dark theme with proper contrast */
+pre, pre.literal-block, pre.code {
+    background: #1e1e2e !important;
+    color: #cdd6f4 !important;
+    padding: 16px 20px !important;
+    border-radius: 8px !important;
+    overflow-x: auto;
+    font-size: 14px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', 'Monaco', monospace;
+    line-height: 1.5;
+    border: 1px solid #313244 !important;
 }
-code, .literal { background: #eef; padding: 2px 6px; border-radius: 3px; font-size: 90%; }
+
+/* Pygments token colors - Catppuccin Mocha theme for dark background */
+pre .keyword, pre .keyword-namespace, pre .keyword.namespace { color: #cba6f7 !important; } /* purple */
+pre .name, pre .name-attribute, pre .name.attribute { color: #89b4fa !important; } /* blue */
+pre .name.builtin, pre .name-builtin { color: #f9e2af !important; } /* yellow */
+pre .name.namespace, pre .name-namespace { color: #94e2d5 !important; } /* teal */
+pre .literal.string, pre .literal-string, pre .literal.string.single, pre .literal-string-single,
+pre .literal.string.affix, pre .literal.string.interpol { color: #a6e3a1 !important; } /* green */
+pre .literal.number, pre .literal-number, pre .literal.number.integer, pre .literal.number.float { color: #fab387 !important; } /* peach */
+pre .comment, pre .comment.single, pre .comment-single { color: #6c7086 !important; font-style: italic; } /* overlay */
+pre .operator, pre .operator.word, pre .operator-word { color: #89dceb !important; } /* sky */
+pre .punctuation { color: #bac2de !important; } /* subtext1 */
+pre .whitespace { color: transparent !important; }
+pre span { color: #cdd6f4; } /* default token color */
+
+/* Inline code */
+tt.docutils.literal, code, .literal {
+    background: #e8edf2 !important;
+    color: #c7254e !important;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 90%;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+}
+tt.docutils.literal .pre {
+    color: #c7254e !important;
+}
+
 img { max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); margin: 1em 0; }
 table { border-collapse: collapse; width: 100%; margin: 1em 0; }
 th, td { border: 1px solid #ddd; padding: 10px 14px; text-align: left; }
@@ -389,6 +426,7 @@ a { color: #2980b9; }
 .figure { text-align: center; margin: 2em 0; }
 .figure .caption { font-style: italic; color: #666; margin-top: 0.5em; }
 </style>
+
 </head>
 <body>
 <div class="document" id="ai-driven-simulation-automation-with-agent-zero">
