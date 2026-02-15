@@ -146,7 +146,7 @@ div.system-messages {
 div.system-messages h1 {
   color: red }
 
-div.system-message {
+div.system-message { display: none !important;
   border: medium outset ;
   padding: 1em }
 
@@ -570,29 +570,22 @@ protocol.</p>
 <div class="section" id="the-network-model">
 <h2>The network model</h2>
 <p>The Aloha network is defined in <tt class="docutils literal">Aloha.ned</tt>:</p>
-<div class="system-message">
-<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">/a0/usr/workdir/showcase-agentzero/doc/index.rst</tt>, line 161)</p>
-<p>Cannot analyze code. No Pygments lexer found for &quot;ned&quot;.</p>
-<pre class="literal-block">
-.. code-block:: ned
-
-   network Aloha
-   {
-       parameters:
-           int numHosts;
-           double txRate &#64;unit(bps);
-           double slotTime &#64;unit(ms);
-           &#64;display(&quot;bgi=background/terrain,s;bgb=1000,1000&quot;);
-       submodules:
-           server: Server;
-           host[numHosts]: Host {
-               txRate = parent.txRate;
-               slotTime = parent.slotTime;
-           }
-   }
-
+<pre class="code literal-block">
+<span class="keyword">network</span> Aloha
+{
+    <span class="keyword">parameters</span>:
+        <span class="keyword">int</span> numHosts;
+        <span class="keyword">double</span> txRate <span class="name builtin">&#64;unit</span>(bps);
+        <span class="keyword">double</span> slotTime <span class="name builtin">&#64;unit</span>(ms);
+        <span class="name builtin">&#64;display</span>(<span class="literal string">&quot;bgi=background/terrain,s;bgb=1000,1000&quot;</span>);
+    <span class="keyword">submodules</span>:
+        server: Server;
+        host[numHosts]: Host {
+            txRate = parent.txRate;
+            slotTime = parent.slotTime;
+        }
+}
 </pre>
-</div>
 </div>
 <div class="section" id="the-experiment-configuration">
 <h2>The experiment configuration</h2>
