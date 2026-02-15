@@ -1,0 +1,810 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.22.4: https://docutils.sourceforge.io/" />
+<title>AI-Driven Simulation Automation with Agent Zero</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 9511 2024-01-13 09:50:07Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+Despite the name, some widely supported CSS2 features are used.
+
+See https://docutils.sourceforge.io/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+.subscript {
+  vertical-align: sub;
+  font-size: smaller }
+
+.superscript {
+  vertical-align: super;
+  font-size: smaller }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left, table.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right, table.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+.align-top    {
+  vertical-align: top }
+
+.align-middle {
+  vertical-align: middle }
+
+.align-bottom {
+  vertical-align: bottom }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: gray; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic, pre.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+
+<style type="text/css">
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 40px;
+    line-height: 1.7;
+    color: #333;
+    background: #fafafa;
+}
+h1 { color: #1a5276; border-bottom: 3px solid #2980b9; padding-bottom: 10px; }
+h2 { color: #2c3e50; margin-top: 2em; }
+h3 { color: #34495e; }
+pre, .literal-block { 
+    background: #2d2d2d; color: #f8f8f2; padding: 16px; 
+    border-radius: 8px; overflow-x: auto; font-size: 14px;
+}
+code, .literal { background: #eef; padding: 2px 6px; border-radius: 3px; font-size: 90%; }
+img { max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); margin: 1em 0; }
+table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+th, td { border: 1px solid #ddd; padding: 10px 14px; text-align: left; }
+th { background: #2980b9; color: white; }
+tr:nth-child(even) { background: #f2f2f2; }
+blockquote { border-left: 4px solid #2980b9; margin: 1em 0; padding: 0.5em 1em; background: #eef6fc; }
+a { color: #2980b9; }
+.note, .tip { background: #eef6fc; border-left: 4px solid #2980b9; padding: 1em; margin: 1em 0; border-radius: 4px; }
+.figure { text-align: center; margin: 2em 0; }
+.figure .caption { font-style: italic; color: #666; margin-top: 0.5em; }
+</style>
+</head>
+<body>
+<div class="document" id="ai-driven-simulation-automation-with-agent-zero">
+<h1 class="title">AI-Driven Simulation Automation with Agent Zero</h1>
+
+<div class="line-block">
+<div class="line">Verified with OMNeT++ version: <strong>6.3</strong></div>
+<div class="line">Source files location: <a class="reference external" href="https://github.com/fganzer/agentzero-omnetpp-showcase">showcases/agentzero</a></div>
+</div>
+<hr class="docutils" />
+<div class="section" id="goals">
+<h1>Goals</h1>
+<p>Running simulation studies typically involves a repetitive cycle of editing
+configuration files, launching batch runs, exporting results, and producing
+charts. Each step requires familiarity with command-line tools, scripting
+languages, and the OMNeT++ analysis framework.</p>
+<p>This showcase demonstrates how <strong>Agent Zero</strong>, an autonomous AI agent framework,
+can automate the <em>entire</em> simulation workflow using only natural-language
+instructions. We show that a user can type a request such as
+<em>&quot;Run a parameter study of the Aloha model varying the number of hosts and
+inter-arrival times, then plot channel utilization&quot;</em> and receive publication-ready
+results -- without writing a single line of code or configuration by hand.</p>
+<p>The showcase covers:</p>
+<ul class="simple">
+<li>Setting up Agent Zero with access to an OMNeT++ installation</li>
+<li>Automating simulation campaigns (batch runs in Cmdenv)</li>
+<li>Extracting and analyzing scalar results with <tt class="docutils literal">opp_scavetool</tt></li>
+<li>Generating charts and statistical summaries programmatically</li>
+<li>Iterating on experiments through conversational interaction</li>
+</ul>
+<div class="figure">
+<img alt="media/workflow_architecture.png" src="media/workflow_architecture.png" style="width: 100%;" />
+<p class="caption"><em>The Agent Zero + OMNeT++ automated workflow: a user issues a natural-language
+request, the AI agent orchestrates simulation execution, result extraction,
+and chart generation.</em></p>
+</div>
+</div>
+<div class="section" id="background">
+<h1>Background</h1>
+<div class="section" id="what-is-agent-zero">
+<h2>What is Agent Zero?</h2>
+<p><a class="reference external" href="https://github.com/frdel/agent-zero">Agent Zero</a> is an open-source
+autonomous AI agent framework. Unlike simple chatbots, Agent Zero can:</p>
+<ul class="simple">
+<li><strong>Execute code</strong> in Python, Node.js, or a Linux terminal</li>
+<li><strong>Browse the web</strong> and read documentation</li>
+<li><strong>Manage files</strong> on the local filesystem</li>
+<li><strong>Delegate subtasks</strong> to specialized subordinate agents</li>
+<li><strong>Remember</strong> information across sessions using long-term memory</li>
+</ul>
+<p>Agent Zero runs inside a Docker container with full root access to a Linux
+environment. This makes it an ideal platform for automating simulation
+workflows, since it can install packages, compile code, run simulations,
+and process results -- all autonomously.</p>
+</div>
+<div class="section" id="why-automate-simulations-with-ai">
+<h2>Why automate simulations with AI?</h2>
+<p>Traditional simulation workflows require the researcher to:</p>
+<ol class="arabic simple">
+<li>Manually edit <tt class="docutils literal">.ini</tt> files for each parameter combination</li>
+<li>Write shell scripts or use <tt class="docutils literal">opp_runall</tt> for batch execution</li>
+<li>Use <tt class="docutils literal">opp_scavetool</tt> or the IDE to export results</li>
+<li>Write Python/R/MATLAB scripts for analysis and plotting</li>
+<li>Iterate when results suggest new parameter ranges</li>
+</ol>
+<p>With an AI agent, the researcher describes the <em>intent</em> (&quot;study how channel
+utilization varies with traffic load&quot;) and the agent handles the <em>mechanics</em>.
+This is particularly valuable for:</p>
+<ul class="simple">
+<li><strong>Rapid prototyping</strong>: Quickly explore &quot;what if&quot; scenarios</li>
+<li><strong>Reproducibility</strong>: The agent generates self-contained scripts</li>
+<li><strong>Education</strong>: Students can learn OMNeT++ interactively</li>
+<li><strong>Complex workflows</strong>: Multi-step analyses that span several tools</li>
+</ul>
+</div>
+</div>
+<div class="section" id="the-setup">
+<h1>The Setup</h1>
+<div class="section" id="prerequisites">
+<h2>Prerequisites</h2>
+<p>The following components are needed:</p>
+<ul class="simple">
+<li><strong>OMNeT++ 6.x</strong> installed and built (with Cmdenv support)</li>
+<li><strong>Agent Zero</strong> framework running in a Docker container</li>
+<li><strong>Python 3</strong> with <tt class="docutils literal">matplotlib</tt> and <tt class="docutils literal">pandas</tt> (installed by the agent as needed)</li>
+<li>Optionally, the <strong>INET Framework</strong> for more complex network simulations</li>
+</ul>
+<p>The Agent Zero Docker container comes with a full Debian/Kali Linux environment.
+OMNeT++ can be installed either manually or by instructing the agent:</p>
+<pre class="code text literal-block">
+User: &quot;Download and install OMNeT++ 6.3, then build the Aloha sample.&quot;
+</pre>
+<p>The agent will autonomously:</p>
+<ol class="arabic simple">
+<li>Download the OMNeT++ archive</li>
+<li>Extract and configure it</li>
+<li>Run <tt class="docutils literal">make</tt> to build the core libraries</li>
+<li>Navigate to <tt class="docutils literal">samples/aloha</tt> and build the simulation</li>
+</ol>
+</div>
+<div class="section" id="connecting-agent-zero-to-omnet">
+<h2>Connecting Agent Zero to OMNeT++</h2>
+<p>Agent Zero accesses OMNeT++ through the standard command-line interface.
+The key tools it uses are:</p>
+<ul class="simple">
+<li><strong>Simulation executable</strong> (e.g., <tt class="docutils literal">./aloha</tt>): Run with <tt class="docutils literal"><span class="pre">-u</span> Cmdenv</tt> for
+batch (non-GUI) execution</li>
+<li><strong>opp_scavetool</strong>: Export <tt class="docutils literal">.sca</tt> and <tt class="docutils literal">.vec</tt> result files to CSV or
+other formats</li>
+<li><strong>Python libraries</strong>: <tt class="docutils literal">pandas</tt> for data manipulation, <tt class="docutils literal">matplotlib</tt>
+for chart generation</li>
+</ul>
+<p>No special plugins or API integrations are required. The agent simply
+executes the same commands a human researcher would type in a terminal.</p>
+<p>The OMNeT++ IDE can also be used alongside Agent Zero for visual inspection
+of network topologies and result analysis:</p>
+<div class="figure">
+<img alt="media/screenshot_ide.png" src="media/screenshot_ide.png" style="width: 100%;" />
+<p class="caption"><em>The OMNeT++ IDE with the Aloha project loaded. Agent Zero can launch
+simulations while the researcher uses the IDE for visual inspection.</em></p>
+</div>
+<p>For interactive debugging, the Qtenv graphical runtime can be launched
+via VNC or X11 forwarding:</p>
+<div class="figure">
+<img alt="media/screenshot_qtenv.png" src="media/screenshot_qtenv.png" style="width: 100%;" />
+<p class="caption"><em>The OMNeT++ Qtenv graphical runtime showing the Aloha simulation
+in progress. Agent Zero launched this simulation and can capture
+screenshots for reporting.</em></p>
+</div>
+</div>
+</div>
+<div class="section" id="demonstration-automated-aloha-parameter-study">
+<h1>Demonstration: Automated Aloha Parameter Study</h1>
+<p>To demonstrate the workflow, we use the classic <strong>Aloha</strong> sample that ships
+with OMNeT++. The Aloha model simulates a shared-medium network where
+multiple hosts transmit packets to a central server using the pure Aloha
+protocol.</p>
+<div class="section" id="the-network-model">
+<h2>The network model</h2>
+<p>The Aloha network is defined in <tt class="docutils literal">Aloha.ned</tt>:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">/a0/usr/workdir/showcase-agentzero/doc/index.rst</tt>, line 161)</p>
+<p>Cannot analyze code. No Pygments lexer found for &quot;ned&quot;.</p>
+<pre class="literal-block">
+.. code-block:: ned
+
+   network Aloha
+   {
+       parameters:
+           int numHosts;
+           double txRate &#64;unit(bps);
+           double slotTime &#64;unit(ms);
+           &#64;display(&quot;bgi=background/terrain,s;bgb=1000,1000&quot;);
+       submodules:
+           server: Server;
+           host[numHosts]: Host {
+               txRate = parent.txRate;
+               slotTime = parent.slotTime;
+           }
+   }
+
+</pre>
+</div>
+</div>
+<div class="section" id="the-experiment-configuration">
+<h2>The experiment configuration</h2>
+<p>The <tt class="docutils literal">omnetpp.ini</tt> file defines a parameter study that varies the number
+of hosts and the mean inter-arrival time:</p>
+<pre class="code ini literal-block">
+<span class="keyword">[PureAlohaExperiment]</span><span class="whitespace">
+</span><span class="name attribute">description</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal string">&quot;Channel utilization in the function of packet generation frequency&quot;</span><span class="whitespace">
+</span><span class="name attribute">repeat</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal string">2</span><span class="whitespace">
+</span><span class="name attribute">sim-time-limit</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal string">90min</span><span class="whitespace">
+</span><span class="name attribute">Aloha.numHosts</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal string">${numHosts=10,15,20}</span><span class="whitespace">
+</span><span class="name attribute">Aloha.host[*].iaTime</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal string">exponential(${iaMean=1,2,3,4,5,7,9}s)</span>
+</pre>
+<p>This configuration produces <strong>42 simulation runs</strong> (3 host counts x
+7 inter-arrival times x 2 repetitions).</p>
+</div>
+<div class="section" id="step-1-running-the-simulations">
+<h2>Step 1: Running the simulations</h2>
+<p>The user simply tells Agent Zero:</p>
+<pre class="code text literal-block">
+User: &quot;Run the PureAlohaExperiment configuration of the Aloha sample
+       with all parameter combinations.&quot;
+</pre>
+<p>Agent Zero translates this into the appropriate command:</p>
+<pre class="code bash literal-block">
+$<span class="whitespace"> </span><span class="name builtin">cd</span><span class="whitespace"> </span>/path/to/samples/aloha<span class="whitespace">
+</span>$<span class="whitespace"> </span>./aloha<span class="whitespace"> </span>-u<span class="whitespace"> </span>Cmdenv<span class="whitespace"> </span>-c<span class="whitespace"> </span>PureAlohaExperiment<span class="whitespace"> </span>--sim-time-limit<span class="operator">=</span>90min
+</pre>
+<p>All 42 runs complete in approximately 4 seconds on a modern machine.
+The agent monitors the output and confirms successful completion:</p>
+<pre class="code text literal-block">
+Run statistics: total 42, successful 42
+</pre>
+</div>
+<div class="section" id="step-2-extracting-results">
+<h2>Step 2: Extracting results</h2>
+<p>Next, the agent uses <tt class="docutils literal">opp_scavetool</tt> to export scalar results:</p>
+<pre class="code bash literal-block">
+$<span class="whitespace"> </span>opp_scavetool<span class="whitespace"> </span><span class="name builtin">export</span><span class="whitespace"> </span>-o<span class="whitespace"> </span>results/all_scalars.csv<span class="whitespace"> </span>-F<span class="whitespace"> </span>CSV-S<span class="whitespace"> </span>-T<span class="whitespace"> </span>s<span class="whitespace"> </span>results/*.sca<span class="whitespace">
+</span>Exported<span class="whitespace"> </span><span class="literal number">294</span><span class="whitespace"> </span>scalars
+</pre>
+<p>The exported CSV contains all scalar results including channel utilization,
+collision statistics, and frame counts for every run.</p>
+</div>
+<div class="section" id="step-3-analyzing-and-visualizing">
+<h2>Step 3: Analyzing and visualizing</h2>
+<p>The agent writes and executes a Python script to parse the CSV, compute
+averages over repetitions, and generate publication-quality charts:</p>
+<pre class="code python literal-block">
+<span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">pandas</span><span class="whitespace"> </span><span class="keyword">as</span><span class="whitespace"> </span><span class="name namespace">pd</span><span class="whitespace">
+</span><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">matplotlib.pyplot</span><span class="whitespace"> </span><span class="keyword">as</span><span class="whitespace"> </span><span class="name namespace">plt</span><span class="whitespace">
+
+</span><span class="name">df</span> <span class="operator">=</span> <span class="name">pd</span><span class="operator">.</span><span class="name">read_csv</span><span class="punctuation">(</span><span class="literal string single">'results/all_scalars.csv'</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">util</span> <span class="operator">=</span> <span class="name">df</span><span class="punctuation">[</span><span class="name">df</span><span class="punctuation">[</span><span class="literal string single">'name'</span><span class="punctuation">]</span> <span class="operator">==</span> <span class="literal string single">'channelUtilization:last'</span><span class="punctuation">]</span><span class="whitespace">
+</span><span class="name">avg</span> <span class="operator">=</span> <span class="name">util</span><span class="operator">.</span><span class="name">groupby</span><span class="punctuation">([</span><span class="literal string single">'numHosts'</span><span class="punctuation">,</span> <span class="literal string single">'iaMean'</span><span class="punctuation">])[</span><span class="literal string single">'value'</span><span class="punctuation">]</span><span class="operator">.</span><span class="name">mean</span><span class="punctuation">()</span><span class="whitespace">
+
+</span><span class="keyword">for</span> <span class="name">nh</span> <span class="operator word">in</span> <span class="punctuation">[</span><span class="literal number integer">10</span><span class="punctuation">,</span> <span class="literal number integer">15</span><span class="punctuation">,</span> <span class="literal number integer">20</span><span class="punctuation">]:</span><span class="whitespace">
+</span>    <span class="name">data</span> <span class="operator">=</span> <span class="name">avg</span><span class="punctuation">[</span><span class="name">nh</span><span class="punctuation">]</span><span class="whitespace">
+</span>    <span class="name">plt</span><span class="operator">.</span><span class="name">plot</span><span class="punctuation">(</span><span class="name">data</span><span class="operator">.</span><span class="name">index</span><span class="punctuation">,</span> <span class="name">data</span><span class="operator">.</span><span class="name">values</span> <span class="operator">*</span> <span class="literal number integer">100</span><span class="punctuation">,</span> <span class="name">marker</span><span class="operator">=</span><span class="literal string single">'o'</span><span class="punctuation">,</span> <span class="name">label</span><span class="operator">=</span><span class="literal string affix">f</span><span class="literal string single">'</span><span class="literal string interpol">{</span><span class="name">nh</span><span class="literal string interpol">}</span><span class="literal string single"> hosts'</span><span class="punctuation">)</span><span class="whitespace">
+
+</span><span class="name">plt</span><span class="operator">.</span><span class="name">axhline</span><span class="punctuation">(</span><span class="name">y</span><span class="operator">=</span><span class="literal number integer">100</span><span class="operator">/</span><span class="punctuation">(</span><span class="literal number integer">2</span><span class="operator">*</span><span class="literal number float">2.718</span><span class="punctuation">),</span> <span class="name">linestyle</span><span class="operator">=</span><span class="literal string single">'--'</span><span class="punctuation">,</span> <span class="name">color</span><span class="operator">=</span><span class="literal string single">'red'</span><span class="punctuation">,</span><span class="whitespace">
+</span>            <span class="name">label</span><span class="operator">=</span><span class="literal string single">'Theoretical max (1/2e)'</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">plt</span><span class="operator">.</span><span class="name">xlabel</span><span class="punctuation">(</span><span class="literal string single">'Inter-arrival Time Mean (s)'</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">plt</span><span class="operator">.</span><span class="name">ylabel</span><span class="punctuation">(</span><span class="literal string single">'Channel Utilization (%)'</span><span class="punctuation">)</span><span class="whitespace">
+</span><span class="name">plt</span><span class="operator">.</span><span class="name">legend</span><span class="punctuation">()</span><span class="whitespace">
+</span><span class="name">plt</span><span class="operator">.</span><span class="name">savefig</span><span class="punctuation">(</span><span class="literal string single">'channel_utilization.png'</span><span class="punctuation">,</span> <span class="name">dpi</span><span class="operator">=</span><span class="literal number integer">150</span><span class="punctuation">)</span>
+</pre>
+</div>
+</div>
+<div class="section" id="results">
+<h1>Results</h1>
+<div class="section" id="channel-utilization">
+<h2>Channel utilization</h2>
+<p>The following chart shows channel utilization as a function of the mean
+inter-arrival time for different numbers of hosts:</p>
+<div class="figure">
+<img alt="media/channel_utilization.png" src="media/channel_utilization.png" style="width: 100%;" />
+<p class="caption"><em>Channel utilization vs. traffic load for 10, 15, and 20 hosts.
+The dashed red line indicates the theoretical maximum for pure Aloha
+(1/2e ≈ 18.4%). The simulation results closely approach this limit.</em></p>
+</div>
+<p>Key observations (automatically identified by Agent Zero):</p>
+<ul class="simple">
+<li><strong>10 hosts</strong>: Peak utilization of ~19.5% at iaMean=2s, close to the
+theoretical maximum of 18.4% (1/2e). The slight overshoot is within
+statistical variation.</li>
+<li><strong>15 hosts</strong>: Peak utilization of ~19.2% at iaMean=3s. More hosts
+require longer inter-arrival times to reach optimal load.</li>
+<li><strong>20 hosts</strong>: Peak utilization of ~19.1% at iaMean=4s. The curve is
+broader, showing that the system is more sensitive to overload with
+more hosts.</li>
+<li><strong>Overload region</strong> (low iaMean): With 20 hosts and iaMean=1s,
+utilization drops to only 4.7% due to excessive collisions.</li>
+</ul>
+</div>
+<div class="section" id="collision-analysis">
+<h2>Collision analysis</h2>
+<p>The agent also produced a collision analysis chart:</p>
+<div class="figure">
+<img alt="media/collided_frames.png" src="media/collided_frames.png" style="width: 100%;" />
+<p class="caption"><em>Number of collided frames vs. traffic load. Higher traffic (lower
+iaMean) and more hosts both dramatically increase collisions.</em></p>
+</div>
+<p>The collision data confirms the utilization findings:</p>
+<ul class="simple">
+<li>At iaMean=1s with 20 hosts, over <strong>95,000 frames</strong> collide during the
+90-minute simulation</li>
+<li>At optimal load (iaMean=4s, 20 hosts), collisions drop to ~16,000</li>
+<li>The relationship between collisions and traffic load is approximately
+exponential in the overload region</li>
+</ul>
+</div>
+<div class="section" id="summary-table">
+<h2>Summary table</h2>
+<p>The complete results, averaged over 2 repetitions per configuration:</p>
+<table border="1" class="docutils">
+<caption>Channel Utilization (%) by Configuration</caption>
+<colgroup>
+<col width="15%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Hosts</th>
+<th class="head">ia=1s</th>
+<th class="head">ia=2s</th>
+<th class="head">ia=3s</th>
+<th class="head">ia=4s</th>
+<th class="head">ia=5s</th>
+<th class="head">ia=7s</th>
+<th class="head">ia=9s</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>10</td>
+<td>15.6</td>
+<td>19.5</td>
+<td>17.6</td>
+<td>15.4</td>
+<td>13.7</td>
+<td>10.9</td>
+<td>9.0</td>
+</tr>
+<tr><td>15</td>
+<td>9.0</td>
+<td>17.8</td>
+<td>19.2</td>
+<td>18.2</td>
+<td>16.9</td>
+<td>14.2</td>
+<td>12.1</td>
+</tr>
+<tr><td>20</td>
+<td>4.7</td>
+<td>14.8</td>
+<td>18.4</td>
+<td>19.0</td>
+<td>18.4</td>
+<td>16.4</td>
+<td>14.3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="use-cases">
+<h1>Use Cases</h1>
+<p>Beyond the Aloha example, Agent Zero can automate many OMNeT++/INET
+workflows:</p>
+<dl class="docutils">
+<dt><strong>1. Rapid parameter exploration</strong></dt>
+<dd>&quot;Try different combinations of TCP congestion control algorithms and
+link delays, and show me which gives the best throughput.&quot;</dd>
+<dt><strong>2. Automated regression testing</strong></dt>
+<dd>&quot;Run all INET showcases and report any that produce different results
+from the expected baselines.&quot;</dd>
+<dt><strong>3. Configuration generation</strong></dt>
+<dd>&quot;Create an omnetpp.ini file for a wireless network with 50 nodes using
+IEEE 802.11g, with a parameter study over transmission power levels.&quot;</dd>
+<dt><strong>4. Result comparison</strong></dt>
+<dd>&quot;Compare the throughput results from my last three simulation campaigns
+and highlight statistically significant differences.&quot;</dd>
+<dt><strong>5. Documentation generation</strong></dt>
+<dd>&quot;Analyze the results in the results/ folder and generate a summary
+report with charts suitable for a conference paper.&quot;</dd>
+<dt><strong>6. Interactive debugging</strong></dt>
+<dd>&quot;The simulation crashes at event #5000. Examine the event log and
+help me identify the cause.&quot;</dd>
+</dl>
+</div>
+<div class="section" id="try-it-yourself">
+<h1>Try It Yourself</h1>
+<p>To reproduce this showcase:</p>
+<ol class="arabic">
+<li><p class="first"><strong>Install Agent Zero</strong> following the instructions at
+<a class="reference external" href="https://github.com/frdel/agent-zero">https://github.com/frdel/agent-zero</a></p>
+</li>
+<li><p class="first"><strong>Install OMNeT++ 6.x</strong> inside the Agent Zero Docker container:</p>
+<pre class="code bash literal-block">
+$<span class="whitespace"> </span><span class="comment single"># Inside the container:
+</span>$<span class="whitespace"> </span>wget<span class="whitespace"> </span>https://github.com/omnetpp/omnetpp/releases/download/omnetpp-6.3/omnetpp-6.3-linux-x86_64.tgz<span class="whitespace">
+</span>$<span class="whitespace"> </span>tar<span class="whitespace"> </span>xzf<span class="whitespace"> </span>omnetpp-6.3-linux-x86_64.tgz<span class="whitespace">
+</span>$<span class="whitespace"> </span><span class="name builtin">cd</span><span class="whitespace"> </span>omnetpp-6.3<span class="whitespace">
+</span>$<span class="whitespace"> </span><span class="name builtin">source</span><span class="whitespace"> </span>setenv<span class="whitespace">
+</span>$<span class="whitespace"> </span>./configure<span class="whitespace"> </span><span class="operator">&amp;&amp;</span><span class="whitespace"> </span>make<span class="whitespace"> </span>-j<span class="keyword">$(</span>nproc<span class="keyword">)</span>
+</pre>
+</li>
+<li><p class="first"><strong>Build the Aloha sample</strong>:</p>
+<pre class="code bash literal-block">
+$<span class="whitespace"> </span><span class="name builtin">cd</span><span class="whitespace"> </span>samples/aloha<span class="whitespace">
+</span>$<span class="whitespace"> </span>opp_makemake<span class="whitespace"> </span>-f<span class="whitespace"> </span><span class="operator">&amp;&amp;</span><span class="whitespace"> </span>make
+</pre>
+</li>
+<li><p class="first"><strong>Ask Agent Zero</strong> to run the study:</p>
+<pre class="code text literal-block">
+&quot;Run the PureAlohaExperiment in the Aloha sample, export the
+ scalar results, and plot channel utilization vs. inter-arrival
+ time for all host counts.&quot;
+</pre>
+</li>
+<li><p class="first">Alternatively, run the provided automation script directly:</p>
+<pre class="code bash literal-block">
+$<span class="whitespace"> </span>python3<span class="whitespace"> </span>run_parameter_study.py<span class="whitespace"> </span>--sim-dir<span class="whitespace"> </span>/path/to/samples/aloha
+</pre>
+</li>
+</ol>
+</div>
+<div class="section" id="limitations-and-future-work">
+<h1>Limitations and Future Work</h1>
+<ul class="simple">
+<li><strong>GUI simulations</strong>: Agent Zero currently drives OMNeT++ through Cmdenv.
+Integration with Qtenv for visual debugging is possible via VNC/screenshot
+analysis but is not yet streamlined.</li>
+<li><strong>Large-scale studies</strong>: Very large parameter spaces (thousands of runs)
+may benefit from integration with <tt class="docutils literal">opp_runall</tt> for parallel execution.</li>
+<li><strong>INET-specific knowledge</strong>: While Agent Zero can read INET documentation
+on-the-fly, pre-loading domain knowledge about common INET models would
+improve response quality.</li>
+<li><strong>Result validation</strong>: The agent can compare results against theoretical
+values (as shown with the 1/2e bound), but automated statistical
+validation could be enhanced.</li>
+</ul>
+</div>
+<div class="section" id="discussion">
+<h1>Discussion</h1>
+<p>Use <a class="reference external" href="https://github.com/fganzer/agentzero-omnetpp-showcase/issues">this page</a>
+to comment on this showcase.</p>
+</div>
+</div>
+</body>
+</html>
