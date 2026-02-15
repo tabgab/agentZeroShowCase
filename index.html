@@ -131,7 +131,7 @@ div.sidebar {
   margin: 0 0 0.5em 1em ;
   border: medium outset ;
   padding: 1em ;
-  background-color: #ffffee ;
+  background-color: transparent ;
   width: 40% ;
   float: right ;
   clear: right }
@@ -277,7 +277,7 @@ pre.literal-block, pre.doctest-block, pre.math, pre.code {
   margin-right: 2em }
 
 pre.code .ln { color: gray; } /* line numbers */
-pre.code, code { background-color: #eeeeee }
+pre.code, code { background-color: transparent }
 pre.code .comment, code .comment { color: #5C6576 }
 pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
 pre.code .literal.string, code .literal.string { color: #0C5404 }
@@ -400,7 +400,10 @@ pre .comment, pre .comment.single, pre .comment-single { color: #6c7086 !importa
 pre .operator, pre .operator.word, pre .operator-word { color: #89dceb !important; } /* sky */
 pre .punctuation { color: #bac2de !important; } /* subtext1 */
 pre .whitespace { color: transparent !important; }
-pre span { color: #cdd6f4; } /* default token color */
+pre span { color: #cdd6f4; background: transparent !important; background-color: transparent !important; } /* default token color, no bg */
+pre.code span, pre.literal-block span { background: transparent !important; background-color: transparent !important; }
+pre.code .deleted, code .deleted { background-color: transparent !important; color: #f38ba8 !important; }
+pre.code .inserted, code .inserted { background-color: transparent !important; color: #a6e3a1 !important; }
 
 /* Inline code */
 tt.docutils.literal, code, .literal {
